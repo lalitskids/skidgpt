@@ -1,0 +1,12 @@
+for running getSummary api
+the request body is
+{
+    "screeningId": "primary key of screening table"
+}
+
+for running getSummary qna api
+the request body is
+{
+    "screeningId": "primary key of screening table",
+    "userQuery": "user question"
+}

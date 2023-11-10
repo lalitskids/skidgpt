@@ -1,0 +1,5 @@
+langchain==0.0.214
+openai==0.27.8
+boto3==1.28.66
+python-dotenv
+lambda_decorators

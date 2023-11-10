@@ -1,0 +1,66 @@
+service: skids-backend-dev-gpt
+org: skids
+
+frameworkVersion: '3'
+
+useDotenv: true
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: python3.10
+  stage: dev
+  region: ap-south-1
+  architecture: x86_64
+  memorySize: 512
+  timeout: 900
+  logs:
+    httpApi: true
+  httpApi:
+    cors: true
+
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:*"
+          Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "logs:*"
+          Resource: "*"
+  environment:
+    SCREENING_TABLE: "skids-${sls:stage}-screening"
+    SUMMARY_TABLE: "skids-${sls:stage}-skidsgpt-reportSummary"
+    QNA_TABLE: "skids-${sls:stage}-skidsgpt-reportQNA"
+    FEEDBACK_TABLE: "skids-${sls:stage}-skidsgpt-feedback"
+
+
+functions:
+  getSummary:
+    handler: handlers/getSummary.handler
+    events:
+      - http:
+          path: /getSummary
+          method: POST
+          cors: true
+
+  getSummaryQA:
+    handler: handlers/getSummaryQA.handler
+    events:
+      - http:
+          path: /getSummaryQA
+          method: POST
+          cors: true
+
+  addFeedback:
+    handler: handlers/addFeedback.handler
+    events:
+      - http:
+          path: /addFeedback
+          method: post
+          cors: true
+
