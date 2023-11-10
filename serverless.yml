@@ -34,9 +34,9 @@ provider:
           Resource: "*"
   environment:
     SCREENING_TABLE: "skids-${sls:stage}-screening"
-    SUMMARY_TABLE: "skids-${sls:stage}-skidsgpt-reportSummary"
-    QNA_TABLE: "skids-${sls:stage}-skidsgpt-reportQNA"
-    FEEDBACK_TABLE: "skids-${sls:stage}-skidsgpt-feedback"
+    SUMMARY_TABLE: "skids-${sls:stage}-gptReportSummary"
+    QNA_TABLE: "skids-${sls:stage}-gptReportQNA"
+    FEEDBACK_TABLE: "skids-${sls:stage}-gptFeedback"
 
 
 functions:
